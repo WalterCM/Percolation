@@ -1,9 +1,11 @@
-public class PercolationStats {
+public class PercolationStats
+{
     private double[] threshold;
     private int      T;
 
     // perform T independent experiments on an N-by-N grid
-    public PercolationStats(int N, int T) {
+    public PercolationStats(int N, int T)
+    {
         if (N <= 0 || T <= 0)
             throw new java.lang.IllegalArgumentException();
         this.T = T;
@@ -35,32 +37,34 @@ public class PercolationStats {
     }
 
     // sample mean of percolation threshold
-    public double mean() {
-        return StdStats.mean(threshold);
-    }
+    public double mean()    { return StdStats.mean(threshold); }
 
     // sample standard deviation of percolation threshold
-    public double stddev() {
+    public double stddev()
+    {
         if (T == 1)
             return Double.NaN;
         return StdStats.stddev(threshold);
     }
 
     // low endpoint of 95% confidence interval
-    public double confidenceLo() {
+    public double confidenceLo()
+    {
         double mean = mean();
         double stddev = stddev();
         return mean - (1.96 * stddev) / Math.sqrt(T);
     }
 
     // high endpoint of 95% confidence interval
-    public double confidenceHi() {
+    public double confidenceHi()
+    {
         double mean = mean();
         double stddev = stddev();
         return mean + (1.96 * stddev) / Math.sqrt(T);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         int N = Integer.parseInt(args[0]);
         int T = Integer.parseInt(args[1]);
 
